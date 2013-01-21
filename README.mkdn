@@ -1,0 +1,76 @@
+# NAME
+
+Soar::Production - REPRESENT SOAR PRODUCTIONS
+
+# VERSION
+
+version 0.01
+
+# SYNOPSIS
+
+# DESCRIPTION
+
+# NAME
+
+Soar::Production- REPRESENTS A SOAR PRODUCTION
+
+## `new`
+
+Argument: text of a Soar production.
+Creates a new production object using the input text.
+
+## `prods_from`
+
+This method extracts productions from a given text. It returns a reference to an array containing production objects. Note that all comments are removed as a preprocessing step to detecting and extracting productions. It takes a set of named arguments:
+'file'- the name of a file to read.
+'text'- the text to read.
+You must choose to export this function via the `use` function:
+
+	use Soar::Production qw(prods_from);
+
+## `prods_from_file`
+
+A shortcut for `prods_from(file =` $arg)>.
+
+## `name`
+
+Optional argument: name to assign production.
+Sets the name of the current production if an argument is given. Returns the name of the production.
+
+# TODO
+
+## `state_name`
+
+Set/get name of matched state
+
+## `superstate_name`
+
+Set/get name of matched state's superstate
+
+## `type`
+Does this production match a state or an impasse?
+
+## `validate`
+Check this production against a datamap.
+
+## check semantic correctness
+Soar::Production::Parser does not check semantic correctness. The following are good things to check:
+=over3
+=item everything matched in RHS must be in LHS
+=item no empty RHS
+=item Only allowable non-operator preference is REJECT
+=item Check for existence of RHS function
+=item <s> not connected
+=item disconnect from goal or impasses (no 'state' or 'impasse' keyword)
+=back
+
+# AUTHOR
+
+Nathan Glenn <garfieldnate@gmail.com>
+
+# COPYRIGHT AND LICENSE
+
+This software is copyright (c) 2012 by Nathan Glenn.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
