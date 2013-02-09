@@ -32,13 +32,13 @@ no_index:
 provides:
   Soar::Production:
     file: lib/Soar/Production.pm
-    version: 0.01
+    version: 0.02
   Soar::Production::Parser:
     file: lib/Soar/Production/Parser.pm
-    version: 0.01
+    version: 0.02
   Soar::Production::Printer:
     file: lib/Soar/Production/Printer.pm
-    version: 0.01
+    version: 0.02
 requires:
   Carp: 0
   Data::Dumper: 0
@@ -55,7 +55,7 @@ resources:
   homepage: https://github.com/garfieldnate/Soar-Production
   license: http://dev.perl.org/licenses/
   repository: https://github.com/garfieldnate/Soar-Production.git
-version: 0.01
+version: 0.02
 x_BuiltWith:
   modules:
     Carp: 1.26

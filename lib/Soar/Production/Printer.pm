@@ -20,7 +20,7 @@ use Data::Dumper;
 use Carp;
 # use Test::More tests => 1;
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 #default behavior is to read the input Soar file and output another one; worthless except for testing
 _run(shift) unless caller;
@@ -419,7 +419,7 @@ Soar::Production::Printer - Print Soar productions
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

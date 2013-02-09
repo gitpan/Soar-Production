@@ -14,7 +14,7 @@ use warnings;
 #needed for advanced regex expressions
 use 5.010;
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 use Soar::Production::Parser::PRDGrammar;
 use Parse::RecDescent;
@@ -201,7 +201,7 @@ Soar::Production::Parser - Parse Soar productions
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 

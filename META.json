@@ -73,15 +73,15 @@
    "provides" : {
       "Soar::Production" : {
          "file" : "lib/Soar/Production.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       },
       "Soar::Production::Parser" : {
          "file" : "lib/Soar/Production/Parser.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       },
       "Soar::Production::Printer" : {
          "file" : "lib/Soar/Production/Printer.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       }
    },
    "release_status" : "stable",
@@ -100,7 +100,7 @@
          "web" : "https://github.com/garfieldnate/Soar-Production"
       }
    },
-   "version" : "0.01",
+   "version" : "0.02",
    "x_BuiltWith" : {
       "modules" : {
          "Carp" : "1.26",

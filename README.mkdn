@@ -4,7 +4,7 @@ Soar::Production - REPRESENT SOAR PRODUCTIONS
 
 # VERSION
 
-version 0.01
+version 0.02
 
 # SYNOPSIS
 
@@ -13,6 +13,8 @@ version 0.01
 # NAME
 
 Soar::Production- REPRESENTS A SOAR PRODUCTION
+
+# METHODS
 
 ## `new`
 
@@ -48,21 +50,23 @@ Set/get name of matched state
 Set/get name of matched state's superstate
 
 ## `type`
+
 Does this production match a state or an impasse?
 
 ## `validate`
+
 Check this production against a datamap.
 
 ## check semantic correctness
+
 Soar::Production::Parser does not check semantic correctness. The following are good things to check:
-=over3
-=item everything matched in RHS must be in LHS
-=item no empty RHS
-=item Only allowable non-operator preference is REJECT
-=item Check for existence of RHS function
-=item <s> not connected
-=item disconnect from goal or impasses (no 'state' or 'impasse' keyword)
-=back
+
+- everything matched in RHS must be in LHS
+- no empty RHS
+- Only allowable non-operator preference is REJECT
+- Check for existence of RHS function
+- <s> not connected
+- disconnect from goal or impasses (no 'state' or 'impasse' keyword)
 
 # AUTHOR
 

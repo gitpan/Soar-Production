@@ -19,7 +19,7 @@ use Data::Dumper;
 use base qw(Exporter);
 our @EXPORT_OK = qw(prods_from prods_from_file);
 
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 my $parser = Soar::Production::Parser->new;
 # my $printer = Soar::Production::Printer->new;
@@ -87,7 +87,7 @@ Soar::Production - REPRESENT SOAR PRODUCTIONS
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -97,7 +97,7 @@ version 0.01
 
 Soar::Production- REPRESENTS A SOAR PRODUCTION
 
-=head METHODS
+=head1 METHODS
 
 =head2 C<new>
 
@@ -133,20 +133,31 @@ Set/get name of matched state
 Set/get name of matched state's superstate
 
 =head2 C<type>
+
 Does this production match a state or an impasse?
 
 =head2 C<validate>
+
 Check this production against a datamap.
 
 =head2 check semantic correctness
+
 Soar::Production::Parser does not check semantic correctness. The following are good things to check:
+
 =over3
+
 =item everything matched in RHS must be in LHS
+
 =item no empty RHS
+
 =item Only allowable non-operator preference is REJECT
+
 =item Check for existence of RHS function
+
 =item <s> not connected
+
 =item disconnect from goal or impasses (no 'state' or 'impasse' keyword)
+
 =back
 
 =head1 AUTHOR

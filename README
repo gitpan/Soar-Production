@@ -2,13 +2,14 @@ NAME
     Soar::Production - REPRESENT SOAR PRODUCTIONS
 
 VERSION
-    version 0.01
+    version 0.02
 
 SYNOPSIS
 DESCRIPTION
 NAME
     Soar::Production- REPRESENTS A SOAR PRODUCTION
 
+METHODS
   "new"
     Argument: text of a Soar production. Creates a new production object
     using the input text.
@@ -39,19 +40,22 @@ TODO
     Set/get name of matched state's superstate
 
   "type"
-Does this production match a state or an impasse?
+    Does this production match a state or an impasse?
+
   "validate"
-Check this production against a datamap.
+    Check this production against a datamap.
+
   check semantic correctness
-Soar::Production::Parser does not check semantic correctness. The following are good things to check:
-=over3
-=item everything matched in RHS must be in LHS
-=item no empty RHS
-=item Only allowable non-operator preference is REJECT
-=item Check for existence of RHS function
-=item <s> not connected
-=item disconnect from goal or impasses (no 'state' or 'impasse' keyword)
-=back
+    Soar::Production::Parser does not check semantic correctness. The
+    following are good things to check:
+
+    everything matched in RHS must be in LHS
+    no empty RHS
+    Only allowable non-operator preference is REJECT
+    Check for existence of RHS function
+    <s> not connected
+    disconnect from goal or impasses (no 'state' or 'impasse' keyword)
+
 AUTHOR
     Nathan Glenn <garfieldnate@gmail.com>
 
@@ -65,6 +69,9 @@ POD ERRORS
     Hey! The above document had some coding errors, which are explained
     below:
 
-    Around line 100:
-        Unknown directive: =head
+    Around line 147:
+        Unknown directive: =over3
+
+    Around line 149:
+        '=item' outside of any '=over'
 
