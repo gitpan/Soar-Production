@@ -2,35 +2,55 @@ NAME
     Soar::Production - REPRESENT SOAR PRODUCTIONS
 
 VERSION
-    version 0.02
+    version 0.03
 
 SYNOPSIS
+            use Soar::Production qw(prods_from prods_from_file);
+            my $prods = prods_from_file( '/path/to/file' );
+            for my $prod (@$prods){
+                    print $prod->name . "\n";
+            }
+            my $prod =
+            'sp{myName
+                    (state <s>)
+                    -->
+                    (<s> ^foo bar)
+            }';
+            my $prod = Soar::Production->new($prod);
+
 DESCRIPTION
+    This is a module for storing, manipulating, and querying Soar
+    productions. There isn't much functionality implemented, yet. Currently
+    there are functions for
+
 NAME
-    Soar::Production- REPRESENTS A SOAR PRODUCTION
+    Soar::Production- Store and manipulate Soar productions
 
 METHODS
   "new"
     Argument: text of a Soar production. Creates a new production object
     using the input text.
 
-  "prods_from"
-    This method extracts productions from a given text. It returns a
-    reference to an array containing production objects. Note that all
-    comments are removed as a preprocessing step to detecting and extracting
-    productions. It takes a set of named arguments: 'file'- the name of a
-    file to read. 'text'- the text to read. You must choose to export this
-    function via the "use" function:
-
-            use Soar::Production qw(prods_from);
-
-  "prods_from_file"
-    A shortcut for "prods_from(file =" $arg)>.
-
   "name"
     Optional argument: name to assign production. Sets the name of the
     current production if an argument is given. Returns the name of the
     production.
+
+EXPORTED FUNCTIONS
+    The following functions may be exported:
+
+  "prods_from_file"
+    A shortcut for "prods_from(file =" $arg)>.
+
+  "prods_from"
+    This method extracts productions from a given text. It returns a
+    reference to an array containing production objects. Note that all
+    comments are removed as a preprocessing step to detecting and extracting
+    productions. It takes a set of named arguments: "file"- the name of a
+    file to read. "text"- the text to read. You must choose to export this
+    function via the "use" function:
+
+            use Soar::Production qw(prods_from);
 
 TODO
   "state_name"
@@ -64,14 +84,4 @@ COPYRIGHT AND LICENSE
 
     This is free software; you can redistribute it and/or modify it under
     the same terms as the Perl 5 programming language system itself.
-
-POD ERRORS
-    Hey! The above document had some coding errors, which are explained
-    below:
-
-    Around line 147:
-        Unknown directive: =over3
-
-    Around line 149:
-        '=item' outside of any '=over'
 

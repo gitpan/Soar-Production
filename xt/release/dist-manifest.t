@@ -8,13 +8,9 @@
 # the same terms as the Perl 5 programming language system itself.
 #
 
-use strict;
-use warnings qw(all);
-
 use Test::More;
 
-## no critic (ProhibitStringyEval, RequireCheckingReturnValueOfEval)
-eval q(use Test::Mojibake);
-plan skip_all => q(Test::Mojibake required for source encoding testing) if $@;
-
-all_files_encoding_ok();
+eval "use Test::DistManifest";
+plan skip_all => "Test::DistManifest required for testing the manifest"
+  if $@;
+manifest_ok();

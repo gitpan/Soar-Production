@@ -6,35 +6,32 @@
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 #
-#modified from "Effective Perl Programming" by Joseph N. Hall, et al.
+package Soar::Production;
+# ABSTRACT: REPRESENT SOAR PRODUCTIONS
 use strict;
 use warnings;
 
-# ABSTRACT: REPRESENT SOAR PRODUCTIONS
-package Soar::Production;
 use Carp;
 use Soar::Production::Parser;
 use Data::Dumper;
-# use Soar::Production::Printer;
-use base qw(Exporter);
-our @EXPORT_OK = qw(prods_from prods_from_file);
+use Exporter::Easy (
+	OK => [qw(prods_from prods_from_file)]
+);
 
-our $VERSION = '0.02'; # VERSION
+our $VERSION = '0.03'; # VERSION
+
+
 
 my $parser = Soar::Production::Parser->new;
-# my $printer = Soar::Production::Printer->new;
 
 #if run as a script, prints the name of every production in an input file.
 unless(caller){
-	my $prods = prods_from(file => $ARGV[0]);
+	my $prods = prods_from_file( $ARGV[0] );
 	for my $prod (@$prods){
 		print $prod->name . "\n";
 	}
 }
 
-sub _run {
-  my ($prod) = @_;
-}
 
 sub new {
   my ($class, $text) = @_;
@@ -42,30 +39,11 @@ sub new {
   return $prod;
 }
 
-sub as_text {
-	my ($class) = @_;
-	# return $printer->tree_to_text($class)
-}
+# sub as_text {
+# 	my ($class) = @_;
+# 	# return tree_to_text($class)
+# }
 
-sub prods_from_file{
-	return prods_from( file => shift() );
-}
-
-sub prods_from {
-	my ($path) = @_;
-	my %args = (
-		text	=> undef,
-		file	=> undef,
-		@_
-	);
-	defined $args{text} or defined $args{file}
-		or croak 'Must specify parameter \'file\' or \'text\' to extract productions.';
-		
-	my $parses = $parser->productions(@_, parse => 1);
-	my @prods = map { bless $_ } @$parses;
-	
-	return \@prods;
-}
 
 sub name {
 	my ($prod, $name) = @_;
@@ -73,6 +51,24 @@ sub name {
 	$prod->{name} = $name
 		if($name);
 	return $prod->{name};
+}
+
+
+sub prods_from_file{
+	my ($file) = @_;
+	return prods_from( file => $file );
+}
+
+
+sub prods_from {## no critic (RequireArgUnpacking)
+	my (%args) = @_;
+	$args{text} or $args{file}
+		or croak 'Must specify parameter \'file\' or \'text\' to extract productions.';
+
+	my $parses = $parser->productions(@_, parse => 1);
+	my @prods = map { bless $_ } @$parses; ## no critic(ProhibitOneArgBless)
+
+	return \@prods;
 }
 
 1;
@@ -87,15 +83,32 @@ Soar::Production - REPRESENT SOAR PRODUCTIONS
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
+	use Soar::Production qw(prods_from prods_from_file);
+	my $prods = prods_from_file( '/path/to/file' );
+	for my $prod (@$prods){
+		print $prod->name . "\n";
+	}
+	my $prod =
+	'sp{myName
+		(state <s>)
+		-->
+		(<s> ^foo bar)
+	}';
+	my $prod = Soar::Production->new($prod);
+
 =head1 DESCRIPTION
+
+This is a module for storing, manipulating, and querying Soar productions.
+There isn't much functionality implemented, yet. Currently there are functions
+for
 
 =head1 NAME
 
-Soar::Production- REPRESENTS A SOAR PRODUCTION
+Soar::Production- Store and manipulate Soar productions
 
 =head1 METHODS
 
@@ -104,23 +117,28 @@ Soar::Production- REPRESENTS A SOAR PRODUCTION
 Argument: text of a Soar production.
 Creates a new production object using the input text.
 
-=head2 C<prods_from>
+=head2 C<name>
 
-This method extracts productions from a given text. It returns a reference to an array containing production objects. Note that all comments are removed as a preprocessing step to detecting and extracting productions. It takes a set of named arguments:
-'file'- the name of a file to read.
-'text'- the text to read.
-You must choose to export this function via the C<use> function:
+Optional argument: name to assign production.
+Sets the name of the current production if an argument is given.
+Returns the name of the production.
 
-	use Soar::Production qw(prods_from);
+=head1 EXPORTED FUNCTIONS
+
+The following functions may be exported:
 
 =head2 C<prods_from_file>
 
 A shortcut for C<prods_from(file => $arg)>.
 
-=head2 C<name>
+=head2 C<prods_from>
 
-Optional argument: name to assign production.
-Sets the name of the current production if an argument is given. Returns the name of the production.
+This method extracts productions from a given text. It returns a reference to an array containing production objects. Note that all comments are removed as a preprocessing step to detecting and extracting productions. It takes a set of named arguments:
+C<file>- the name of a file to read.
+C<text>- the text to read.
+You must choose to export this function via the C<use> function:
+
+	use Soar::Production qw(prods_from);
 
 =head1 TODO
 
@@ -144,7 +162,7 @@ Check this production against a datamap.
 
 Soar::Production::Parser does not check semantic correctness. The following are good things to check:
 
-=over3
+=over
 
 =item everything matched in RHS must be in LHS
 
